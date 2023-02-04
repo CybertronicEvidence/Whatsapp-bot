@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     } else {
         try {
             const completion = await openAI.createCompletion({
-                model: "text-davinci-003", // required
+                model: "davinci:ft-personal-2023-02-04-18-24-43", // required
                 prompt: req.body.Body, // completion based on this
                 temperature: 0.6, //
                 n: 1,
