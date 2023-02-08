@@ -20,11 +20,12 @@ export default async function handler(req, res) {
             const completion = await openAI.createCompletion({
                 model: "davinci:ft-personal-2023-02-08-23-36-58", // required
                 prompt: req.body.Body, // completion based on this
-                temperature: 1, //
+                temperature: 0.9, //
                 n: 1,
                 max_tokens: 256,
                 top_p: 1,
-                frequency_penalty: 0.45
+                best_of: 1
+                // frequency_penalty: 0.45
                 // stop: "."
             });
             replyToBeSent = removeIncompleteText(completion.data.choices[0].text)
