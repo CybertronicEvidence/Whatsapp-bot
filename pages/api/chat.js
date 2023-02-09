@@ -8,18 +8,31 @@ const configuration = new Configuration({
 });
 const openAI = new OpenAIApi(configuration);
 export default async function (req, res) {
-    // const { message } = req.body.Body;
-    // console.log(message);
-    const response = await openAI.createCompletion({
-        model: "text-davinci-003",
-        prompt: `Who is Elon Musk?`,
-        max_tokens: 256,
-        temperature: 0.5,
-    });
+    let reply = '';
+    const message = req.body.Body || '';
+    console.log(message);
+    try {
+        const response = await openAI.createCompletion({
+            model: "text-davinci-003",
+            prompt: req.body.Body,
+            max_tokens: 256,
+            temperature: 0.5,
+        });
+        reply = response.data.choices[0].text;
+    } catch (error) {
+        reply = 'There was an issue not caused by you'
+    }
 
-    res.status(200).json({ result: response.data.choices[0].text });
-    console.log(response.data.choices[0].text)
+    // send response
+    res.writeHead(200, {
+        'Content-Type': 'application/json'
+    });
+    res.end(reply.toString());
+    // res.status(200).json({ result: response.data.choices[0].text });
+    // console.log(response.data.choices[0].text)
 };
+
+
 // Note: This assumes you have already installed the openai package.
 
 
