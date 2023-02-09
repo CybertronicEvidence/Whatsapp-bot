@@ -9,7 +9,7 @@ const openAI = new OpenAIApi(configuration);
 
 const message = req.body.Body || '';
 
-const openaiCompletion = async (prompt = message) => {
+const openaiCompletion = async (prompt = 'Who is Elon Musk?') => {
     const response = await openAI.createCompletion({
         prompt,
         max_tokens: 100,
