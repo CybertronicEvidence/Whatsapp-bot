@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 prompt: req.body.Body, // completion based on this
                 temperature: 0.9, //
                 n: 1,
-                max_tokens: 2048,
+                max_tokens: 256,
                 top_p: 1,
                 best_of: 1
                 // frequency_penalty: 0.45
@@ -31,11 +31,12 @@ export default async function handler(req, res) {
             replyToBeSent = removeIncompleteText(completion.data.choices[0].text)
 
         } catch (error) {
-            if (error.response) {
-                replyToBeSent = "There was an issue with the server"
-            } else { // error getting response
-                replyToBeSent = "An error occurred during your request.";
-            }
+            // if (error.response) {
+            //     replyToBeSent = "There was an issue with the server"
+            // } else { // error getting response
+            //     replyToBeSent = "An error occurred during your request.";
+            // }
+            replyToBeSent = error
         }
     }
 
