@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 prompt: req.body.Body, // completion based on this
                 temperature: 0.7, //
                 n: 1,
-                max_tokens: 256,
+                max_tokens: 2048,
                 top_p: 1,
                 best_of: 1
                 // frequency_penalty: 0.45
